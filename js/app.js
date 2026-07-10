@@ -310,35 +310,14 @@ onAuthStateChanged(auth, (user) => {
     { value: 'cancelada', label: 'Cancelada', dotClass: '' }
   ];
 
-  function getCitas() {
-    try {
-      const data = JSON.parse(localStorage.getItem(STORAGE_KEYS.citas));
-      if (Array.isArray(data) && data.length) return data;
-    } catch {}
-    // Datos de ejemplo (igual al diseño de Figma) para la primera carga
-    const seed = [
-      {
-        id: cryptoId(),
-        cliente: 'MERLIS PAJARO CASTAÑO',
-        numero: '3001234567',
-        inmueble: 'Edificio Montesion Piso 1',
-        fecha: '10:08 a.m.',
-        estado: 'en-proceso',
-        notas: ''
-      },
-      {
-        id: cryptoId(),
-        cliente: 'MERLIS PAJARO CASTAÑO',
-        numero: '3001234567',
-        inmueble: 'Edificio Montesion Piso 1',
-        fecha: '10:08 a.m.',
-        estado: 'en-proceso',
-        notas: ''
-      }
-    ];
-    setCitas(seed);
-    return seed;
-  }
+function getCitas() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEYS.citas));
+    if (Array.isArray(data)) return data;
+  } catch {}
+  setCitas([]);
+  return [];
+}
 
   function setCitas(list) {
     localStorage.setItem(STORAGE_KEYS.citas, JSON.stringify(list));
@@ -389,10 +368,12 @@ onAuthStateChanged(auth, (user) => {
     }[s]));
   }
 
-  function renderCitas() {
-    const citas = getCitas();
-    const html = citas.length
-      ? citas.map(taskCardHTML).join('')
+function renderCitas() {
+  // Las citas "Completada" quedan guardadas (por si luego se agrega un
+  // historial), pero se ocultan de Home y Citas.
+  const citas = getCitas().filter(c => c.estado !== 'completada');
+  const html = citas.length
+    ? citas.map(taskCardHTML).join('')
       : '<div class="empty-state">Aún no tienes citas agendadas.<br>Toca "Agendar Nueva visita" para crear la primera.</div>';
 
     const citasList = $('#citas-list');
