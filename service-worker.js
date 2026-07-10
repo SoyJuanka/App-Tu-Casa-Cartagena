@@ -3,14 +3,16 @@
 
 const CACHE_NAME = 'tucasa-cartagena-v1';
 const APP_SHELL = [
-  './',
+ './',
   './index.html',
   './css/styles.css',
   './js/app.js',
+  './js/firebase-config.js',
   './manifest.json',
-  './icons/logo.svg',
+  './imagenes/Logo Tu Casa.webp',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './icons/icon-maskable-512.png'
 ];
 
 self.addEventListener('install', (event) => {
