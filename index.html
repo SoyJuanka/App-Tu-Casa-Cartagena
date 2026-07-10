@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Tu Casa Cartagena</title>
+    <meta
+      name="description"
+      content="App de gestión inmobiliaria Tu Casa Cartagena: citas, captación y calculadora notarial."
+    />
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="icon" href="imagenes/Favicon prueba 1.svg" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div id="app-shell">
+      <!-- ===================================================
+       VISTA 1: GET STARTED
+  ==================================================== -->
+      <section id="view-get-started" class="view is-active">
+        <div class="gs-bg"></div>
+        <div class="gs-content">
+          <img
+            src="imagenes/Logo Tu Casa.webp"
+            alt="Tu Casa Cartagena"
+            class="gs-logo"
+          />
+          <button class="btn btn-primary" data-goto="login">
+            Empezar
+            <img src="imagenes/arrow-right.svg" alt="" />
+          </button>
+        </div>
+      </section>
+
+      <!-- ===================================================
+       VISTA 2: LOGIN
+  ==================================================== -->
+      <section id="view-login" class="view auth-view">
+        <div class="view-content">
+          <img
+            src="imagenes/Logo Tu Casa.webp"
+            alt="Tu Casa Cartagena"
+            class="auth-logo"
+          />
+
+          <form id="form-login" novalidate>
+            <div class="field">
+              <span class="field-label">Email</span>
+              <div class="input-pill" id="login-email-pill">
+                <img src="imagenes/mail.svg" alt="" class="email" />
+                <input
+                  type="email"
+                  id="login-email"
+                  placeholder="Ingrese su correo electronico"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <p class="field-error" id="login-email-error">
+                Ingresa un correo válido.
+              </p>
+            </div>
+
+            <div class="field">
+              <span class="field-label">Contraseña</span>
+              <div class="input-pill" id="login-pass-pill">
+                <img src="imagenes/lock.svg" alt="" class="password" />
+                <input
+                  type="password"
+                  id="login-pass"
+                  placeholder="Ingrese su contraseña"
+                  autocomplete="current-password"
+                  required
+                  minlength="6"
+                />
+              </div>
+              <p class="field-error" id="login-pass-error">
+                Mínimo 6 caracteres.
+              </p>
+            </div>
+
+            <div class="remember-row">
+              <label
+                ><input type="checkbox" id="login-remember" checked /> Remember
+                me</label
+              >
+              <button type="button" class="btn-link" id="btn-forgot">
+                Olvido su contraseña?
+              </button>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Iniciar sesion
+            </button>
+          </form>
+
+          <p class="auth-footer mt-16">
+            ¿No tienes cuenta?
+            <button class="btn-link" data-goto="signup">REGISTRATE</button>
+          </p>
+
+          <div class="divider-row">O iniciar sesion con</div>
+          <div class="social-row">
+            <button
+              class="facebook"
+              id="btn-facebook-login"
+              aria-label="Iniciar sesión con Facebook"
+            >
+              <img src="imagenes/icono facebook.svg" alt="" />
+            </button>
+            <button
+              class="google"
+              id="btn-google-login"
+              aria-label="Iniciar sesión con Google"
+            >
+              <img src="imagenes/icono google.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+       VISTA 3: SIGN UP
+  ==================================================== -->
+      <section id="view-signup" class="view auth-view">
+        <div class="view-content">
+          <img
+            src="imagenes/Logo Tu Casa.webp"
+            alt="Tu Casa Cartagena"
+            class="auth-logo"
+          />
+
+          <form id="form-signup" novalidate>
+            <div class="field">
+              <span class="field-label">Nombre</span>
+              <div class="input-pill">
+                <img src="imagenes/user.svg" alt="" />
+
+                <input
+                  type="text"
+                  id="signup-name"
+                  placeholder="Ingrese su nombre de usuario"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <span class="field-label">Email</span>
+              <div class="input-pill">
+                <img src="imagenes/mail.svg" alt="" />
+                <input
+                  type="email"
+                  id="signup-email"
+                  placeholder="Ingrese su correo electronico"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <span class="field-label">Contraseña</span>
+              <div class="input-pill">
+                <img src="imagenes/lock.svg" alt="" />
+                <input
+                  type="password"
+                  id="signup-pass"
+                  placeholder="Ingrese su contraseña"
+                  minlength="6"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+            </div>
+
+            <p class="auth-footer text-left mb-20">
+              ¿Ya tienes cuenta?
+              <button type="button" class="btn-link" data-goto="login">
+                INGRESA
+              </button>
+            </p>
+
+            <button type="submit" class="btn btn-primary">Registrarme</button>
+          </form>
+
+          <div class="divider-row">O iniciar sesion con</div>
+          <div class="social-row">
+            <img src="imagenes/icono facebook.svg" alt="" class="facebook" />
+            <img src="imagenes/icono google.svg" alt="" class="google" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================
+       VISTA 4: HOME — TAREAS PENDIENTES
+  ==================================================== -->
+      <section id="view-home" class="view">
+        <div class="view-content has-nav">
+          <div class="top-greeting">
+            <span class="avatar-icon">
+              <img src="imagenes/icono usuario inicio.svg" alt="" />
+            </span>
+            <span id="home-greeting">¡Hola Tu Casa Cartagena!</span>
+          </div>
+
+          <h1 class="page-title">Tareas pendientes</h1>
+
+          <div id="home-task-list"></div>
+        </div>
+        <nav class="bottom-nav" data-nav-for="view-home"></nav>
+      </section>
+
+      <!-- ===================================================
+       VISTA 5: CALCULADORA NOTARIAL
+  ==================================================== -->
+      <section id="view-calculadora" class="view">
+        <div class="view-content has-nav">
+          <div class="top-greeting">
+            <span class="avatar-icon">
+              <img src="imagenes/icono usuario inicio.svg" alt="" />
+            </span>
+            <span>¡Hola Tu Casa Cartagena!</span>
+          </div>
+
+          <h1 class="page-title compact calc-title text-center">
+            Sim Notarial<br />Tu Casa Cartagena
+          </h1>
+          <p class="page-subtitle text-center">
+            Simulador de gastos notariales · Colombia
+          </p>
+
+          <p class="section-title">Datos de la Compraventa</p>
+
+          <form id="form-calculadora">
+            <div class="field">
+              <span class="field-label">Valor de Inmueble</span>
+              <div class="field-outline">
+                <span class="prefix">COP</span>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  id="calc-valor-inmueble"
+                  placeholder="200.000.000"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <span class="field-label"
+                >Valor Catastral
+                <span class="text-muted-inline">(Opcional)</span></span
+              >
+              <div class="field-outline">
+                <span class="prefix">COP</span>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  id="calc-valor-catastral"
+                  placeholder="200.000.000"
+                />
+              </div>
+            </div>
+
+            <p class="field-label mb-10">Tipo de Comprador</p>
+            <div class="segmented" data-group="comprador">
+              <button
+                type="button"
+                class="seg-btn is-selected"
+                data-value="natural"
+              >
+                Persona Natural
+              </button>
+              <button type="button" class="seg-btn" data-value="juridica">
+                Persona Juridica
+              </button>
+            </div>
+
+            <p class="field-label my-20-10">Tipo de Vendedor</p>
+            <div class="segmented" data-group="vendedor">
+              <button
+                type="button"
+                class="seg-btn is-selected"
+                data-value="natural"
+              >
+                Persona Natural
+              </button>
+              <button type="button" class="seg-btn" data-value="juridica">
+                Persona Juridica
+              </button>
+            </div>
+
+            <div class="field mt-24">
+              <span class="field-label"
+                >Valor del credito hipotecario
+                <span class="text-muted-inline">(Opcional)</span></span
+              >
+              <div class="field-outline">
+                <span class="prefix">COP</span>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  id="calc-valor-credito"
+                  placeholder="200.000.000"
+                />
+              </div>
+              <p class="field-hint">
+                ⓘ Si es compra de contado, déjalo en blanco
+              </p>
+            </div>
+
+            <button type="submit" class="btn btn-primary-dark mt-16">
+              <img src="imagenes/calculadora.svg" alt="" />
+              Calcular gastos
+            </button>
+          </form>
+        </div>
+        <nav class="bottom-nav" data-nav-for="view-calculadora"></nav>
+      </section>
+
+      <!-- ===================================================
+       VISTA 5b: RESULTADO CALCULADORA NOTARIAL
+  ==================================================== -->
+      <section id="view-calculadora-resultado" class="view">
+        <div class="view-content has-nav">
+          <div class="top-greeting">
+            <span class="avatar-icon">
+              <img src="imagenes/icono usuario inicio.svg" alt="" />
+            </span>
+            <span>¡Hola Tu Casa Cartagena!</span>
+          </div>
+
+          <h1 class="page-title compact calc-title text-center">
+            Sim Notarial<br />Tu Casa Cartagena
+          </h1>
+          <p class="page-subtitle text-center">
+            Simulador de gastos notariales · Colombia
+          </p>
+
+          <button type="button" class="back-link" id="btn-editar-datos">
+            <img
+              src="imagenes/arrow-left.svg"
+              alt=""
+              class="icono-calculadora"
+            />
+            Editar datos
+          </button>
+
+          <div class="total-card">
+            <p class="total-label">Total de gastos Notariales</p>
+            <p class="total-amount" id="res-total">$ 0</p>
+            <div class="split-row">
+              <div class="split-col">
+                <p class="split-label">Comprador</p>
+                <p class="split-amount" id="res-total-comprador">$ 0</p>
+              </div>
+              <div class="split-col split-col-right">
+                <p class="split-label">Vendedor</p>
+                <p class="split-amount" id="res-total-vendedor">$ 0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="breakdown-card">
+            <div class="breakdown-row header-row">
+              <span class="row-label">
+                <img src="imagenes/icono comprador.svg" class="icon" alt="" />
+                Gastos del Comprador
+              </span>
+              <span class="row-value" id="res-c-total">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono-escritura.svg" alt="" />
+                Escritura Notarial (comprador)
+              </span>
+              <span class="row-value" id="res-c-escritura">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono iva.svg" alt="" />
+                IVA Notarial (Comprador)
+              </span>
+              <span class="row-value" id="res-c-iva">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono-registro.svg" alt="" />
+                Derechos de Registro
+              </span>
+              <span class="row-value" id="res-c-registro">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono impuesto.svg" alt="" />
+                Impuesto de Beneficiencia
+              </span>
+              <span class="row-value" id="res-c-beneficencia">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono gestion.svg" alt="" />
+                Gestión Estimada
+              </span>
+              <span class="row-value" id="res-c-gestoria">$ 0</span>
+            </div>
+          </div>
+
+          <div class="breakdown-card">
+            <div class="breakdown-row header-row">
+              <span class="row-label">
+                <img src="imagenes/icono vendedor.svg" alt="" />
+                Gastos del Vendedor
+              </span>
+              <span class="row-value" id="res-v-total">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono-escritura.svg" alt="" />
+                Escritura Notarial (vendedor)
+              </span>
+              <span class="row-value" id="res-v-escritura">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono iva.svg" alt="" />
+                IVA Notarial (Vendedor)
+              </span>
+              <span class="row-value" id="res-v-iva">$ 0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">
+                <img src="imagenes/icono retencion.svg" alt="" />
+                Retencion en la fuente
+              </span>
+              <span class="row-value" id="res-v-retencion">$ 0</span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary-dark mt-16"
+            id="btn-nueva-simulacion"
+          >
+            <img src="imagenes/icono refrescar.svg" alt="" />
+            Nueva simulacion
+          </button>
+
+          <p class="field-hint mt-16 text-center">
+            Los valores son estimados y pueden variar según la notaría y el
+            municipio.
+          </p>
+        </div>
+        <nav class="bottom-nav" data-nav-for="view-calculadora-resultado"></nav>
+      </section>
+
+      <!-- ===================================================
+       VISTA 6: CITAS — CRONOGRAMA
+  ==================================================== -->
+      <section id="view-citas" class="view">
+        <div class="view-content has-nav">
+          <div class="top-greeting">
+            <span class="avatar-icon">
+              <img src="imagenes/icono usuario inicio.svg" alt="" />
+            </span>
+            <span>¡Hola Tu Casa Cartagena!</span>
+          </div>
+
+          <h1 class="page-title">Cronograma de citas</h1>
+
+          <div id="citas-list"></div>
+
+          <button class="btn btn-primary-dark mt-16" data-goto="crear-cita">
+            <img src="imagenes/citas.svg" alt="" />
+            Agendar Nueva visita
+          </button>
+        </div>
+        <nav class="bottom-nav" data-nav-for="view-citas"></nav>
+      </section>
+
+      <!-- ===================================================
+       VISTA 7: CREAR CITA
+  ==================================================== -->
+      <section id="view-crear-cita" class="view">
+        <div class="view-content has-nav">
+          <div class="top-greeting">
+            <span class="avatar-icon">
+              <img src="imagenes/icono usuario inicio.svg" alt="" />
+            </span>
+            <span>¡Hola Tu Casa Cartagena!</span>
+          </div>
+
+          <h1 class="page-title">Cronograma de citas</h1>
+
+          <form id="form-crear-cita">
+            <div class="appt-form-card">
+              <div class="appt-form-row">
+                <label for="cc-nombre">Nombre del cliente:</label>
+                <input type="text" id="cc-nombre" required />
+              </div>
+              <div class="appt-form-row">
+                <label for="cc-numero">Numero de contacto</label>
+                <input type="tel" id="cc-numero" required />
+              </div>
+              <div class="appt-form-row">
+                <label for="cc-inmueble">Proyecto/inmueble</label>
+                <input type="text" id="cc-inmueble" required />
+              </div>
+              <div class="appt-form-row">
+                <label for="cc-fecha">Fecha / Hora</label>
+                <input
+                  type="text"
+                  id="cc-fecha"
+                  placeholder="dd/mm/aaaa hh:mm"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="create-visit-link">
+              <img src="imagenes/icono +.svg" alt="" />
+              Crear nueva visita
+            </button>
+          </form>
+        </div>
+        <nav class="bottom-nav" data-nav-for="view-crear-cita"></nav>
+      </section>
+    </div>
+
+    <!-- Modal: cambiar estado -->
+    <div class="modal-overlay" id="modal-estado">
+      <div class="modal-sheet">
+        <p class="modal-title">Cambiar estado de la cita</p>
+        <div id="modal-estado-options"></div>
+        <button class="modal-cancel" id="modal-estado-cancel">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Plantilla del bottom nav (se clona por JS) -->
+    <template id="tpl-bottom-nav">
+      <button class="nav-item" data-view="view-home">
+        <img src="imagenes/home.svg" class="icon" alt="" />
+        Home
+      </button>
+      <button class="nav-item" data-view="view-captacion">
+        <img src="imagenes/captacion.svg" alt="" />
+        Captación
+      </button>
+      <button class="nav-item" data-view="view-calculadora">
+        <img src="imagenes/calculadora.svg" alt="" />
+        Calculadora
+      </button>
+      <button class="nav-item" data-view="view-citas">
+        <img src="imagenes/citas.svg" alt="" />
+        Citas
+      </button>
+    </template>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
